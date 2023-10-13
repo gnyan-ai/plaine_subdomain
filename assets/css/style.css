@@ -62,6 +62,8 @@ TABLE OF CONTENTS:-
 ================================================================*/
 /* --------------- variable --------------- */
 :root {
+  --cr-realbox-shadow: 0 1px 6px 0 var(--color-realbox-shadow);
+  --color-realbox-shadow: #20212447;
   --color-main: #0066ff;
   --color-primary: #0066ff;
   --color-secondary: #02b5ff;
@@ -426,7 +428,7 @@ html::-webkit-scrollbar-corner {
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Nunito", sans-serif;
   text-decoration: none;
   font-size: 0.9em;
   overflow-x: hidden;
@@ -1047,7 +1049,7 @@ small.text {
   right: -50px;
   width: 35px;
   height: 35px;
-  border-radius: 7px; 
+  border-radius: 7px;
   background: var(--color-blue6);
   color: #fff;
   font-size: 11px;
@@ -1947,6 +1949,7 @@ small.text {
   filter: drop-shadow(0 13px 20px rgba(7, 57, 114, 0.2078431373));
   font-size: 12px;
 }
+
 .btn.blue6-butn {
   background: var(--color-blue6);
   -webkit-filter: drop-shadow(0 13px 20px rgba(7, 57, 114, 0.2078431373));
@@ -2941,7 +2944,8 @@ footer.style-1 .foot_info li i {
   position: relative;
 }
 
-.navbar.style-1 .navbar-brand img, footer.style-1 .foot_info .logo img {
+.navbar.style-1 .navbar-brand img,
+footer.style-1 .foot_info .logo img {
   width: 100px;
   height: 80px;
 }
@@ -3041,6 +3045,32 @@ footer.style-1 .foot_info li i {
 .navbar.style-3 .navbar-nav .nav-item .nav-link.active,
 .navbar.style-3 .navbar-nav .nav-item .nav-link:hover {
   background-color: rgba(0, 0, 0, 0.1333333333);
+}
+
+#result li {
+  display: flex;
+  width: 100%;
+  padding: 16px 180px 16px 60px;
+  background-color: #fff;
+  /* border-bottom: 1px solid #ccc; */
+}
+
+.list-group li:nth-child(3) {
+  border: none;
+}
+
+.list-group {
+  margin: 0 auto;
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, .2);
+  /* border-bottom: 1px solid #ccc; */
+  /* box-shadow: var(--cr-realbox-shadow); */
 }
 
 .navbar.style-3 .nav-side .search-icon {
@@ -4067,6 +4097,7 @@ header.style-5 .info .form .form-group {
   position: relative;
   max-width: 550px;
   margin: 40px auto;
+  margin-bottom: 0;
 }
 
 header.style-5 .info .form .form-group .icon {
@@ -4082,6 +4113,14 @@ header.style-5 .info .form .form-group input {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 30px;
+  -webkit-box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, .2);
+}
+
+header.style-5 .info .form .form-group input:focus {
+  border-radius: 16px 16px 0 0;
+  border: none;
 }
 
 header.style-5 .info .form .form-group .btn {
@@ -7314,7 +7353,7 @@ header.style-15 .countdown-content .logos img {
 .portfolio.style-1 .portfolio-card .info h5 a {
   color: #000;
   font-weight: bold;
-  
+
 }
 
 .portfolio.style-1 .portfolio-card .info small {
@@ -8651,14 +8690,16 @@ header.style-15 .countdown-content .logos img {
   margin-top: -30px;
 }
 
-.testimonials.style-8 .testi-card .info {
+.testimonials.style-8 .testi-card .info,
+.tab-pane .testi-card .info {
   background-color: #fff;
   padding: 30px;
   border-radius: 10px;
   position: relative;
 }
 
-.testimonials.style-8 .testi-card .info::after {
+.testimonials.style-8 .testi-card .info::after,
+.tab-pane .testi-card .info::after {
   position: absolute;
   content: "";
   bottom: -20px;
@@ -8671,20 +8712,23 @@ header.style-15 .countdown-content .logos img {
   border-bottom: 10px solid transparent;
 }
 
-.testimonials.style-8 .testi-card .info .stars {
+.testimonials.style-8 .testi-card .info .stars,
+.tab-pane .testi-card .info .stars {
   color: var(--color-orange1);
   margin-bottom: 25px;
   position: relative;
   z-index: 5;
 }
 
-.testimonials.style-8 .testi-card .info p {
+.testimonials.style-8 .testi-card .info p,
+.tab-pane .testi-card .info p {
   font-size: 20px;
   position: relative;
   z-index: 5;
 }
 
-.testimonials.style-8 .testi-card .info .icon {
+.testimonials.style-8 .testi-card .info .icon,
+.tab-pane .testi-card .info .icon {
   position: absolute;
   width: 100px;
   right: 30px;
@@ -15291,7 +15335,6 @@ footer.style-15 .foot p {
 }
 
 .portfolio-page.style-1 .portfolio-projects.style-1 .controls {
-  text-align: center;
   margin-bottom: 50px;
 }
 
@@ -15300,7 +15343,7 @@ footer.style-15 .foot p {
   background: transparent;
   font-weight: bold;
   text-transform: capitalize;
-  margin: 10px;
+  margin: 9px;
 }
 
 .portfolio-page.style-1 .portfolio-projects.style-1 .controls button.mixitup-control-active {
@@ -20815,6 +20858,7 @@ footer.style-15 .foot p {
   display: inline-block;
   width: 90%;
 }
-.content{
+
+.content {
   z-index: 9;
 }

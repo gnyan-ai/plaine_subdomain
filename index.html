@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="assets/css/lib/swiper.min.css" />
   <!-- ====== global style ====== -->
   <link rel="stylesheet" href="assets/css/style.css" />
+
 </head>
 
 <body>
@@ -97,7 +98,7 @@
             </a>
           </li>
         </ul>
-        
+
       </div>
     </div>
   </nav>
@@ -124,15 +125,16 @@
             </p>
             <form action="https://iteck-html.themescamp.com/contact.php" class="form" method="post">
               <div class="form-group">
-                <span class="icon">
+                <span style="cursor: pointer;" class="icon">
                   <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
-                <input type="text" placeholder="Search for AI/Ml Model, Use Cases" />
+                <input type="text" oninput="search()" onkeydown="handleSpacebar(event)" id="searchBox" placeholder="Search for AI/Ml Model, Use Cases" />
                 <a href="models.html" class="btn rounded-pill blue6-butn hover-blue2 sm-butn fw-bold text-white">
                   <span>Search for AI/Ml Model<i class="bi bi-arrow-right ms-1"></i>
                   </span>
                 </a>
               </div>
+              <ul class="list-group" id="result"></ul>
             </form>
           </div>
         </div>
@@ -630,7 +632,8 @@
               <div class="input-group my-4">
                 <input type="text" class="form-control" placeholder="Enter your email" aria-label="Enter your email"
                   aria-describedby="button-addon2" />
-                <button class="btn blue6-butn hover-blue2 hover-blue2 border-0 text-white px-3" type="button" id="button-addon2">
+                <button class="btn blue6-butn hover-blue2 hover-blue2 border-0 text-white px-3" type="button"
+                  id="button-addon2">
                   <span>Subscribe</span>
                 </button>
               </div>
@@ -680,6 +683,80 @@
   <!-- <script src="assets/js/lib/pace.js"></script> -->
   <script src="assets/js/lib/scrollIt.min.js"></script>
   <script src="assets/js/main.js"></script>
+
+  <script>
+    var jsonData; // To store the JSON data
+
+    // Fetch the JSON data
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        jsonData = data; // Store the data
+      })
+      .catch(error => console.error('Error fetching data:', error));
+
+    var currentSearch = ""; // Store the current search term
+
+    function displayResults(results) {
+      console.log(results);
+      var resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = "";
+
+      if (results.length === 0) {
+        if (currentSearch.trim() === "") {
+          resultDiv.innerHTML = ""; // Clear the result div when the input is empty
+        } else {
+          resultDiv.innerHTML = "No matching applications found.";
+        }
+      } else {
+        results.forEach(function (result) {
+          var link = result.link;
+          var applicationName = result["Application Name"];
+          var resultItem1 = document.createElement("li");
+          var resultItem = document.createElement("a");
+          resultItem.href = link;
+          resultItem.textContent = applicationName;
+          resultItem1.appendChild(resultItem);
+          resultDiv.appendChild(resultItem1);
+        });
+      }
+    }
+
+    function search() {
+      var searchKeyword = document.getElementById("searchBox").value.toLowerCase();
+      currentSearch = searchKeyword;
+
+      var matchingResults = [];
+
+      for (var i = 0; i < jsonData.length; i++) {
+        var application = jsonData[i];
+        var applicationName = application["Application Name"].toLowerCase();
+        var applicationDescription = application["Application Description"].toLowerCase();
+        var useCases = application["Supported Use Case(s)"].join(', ').toLowerCase();
+        var tags = application["Tags (for search and SEO)"].join(', ').toLowerCase();
+
+        if (currentSearch.trim() === "") {
+          displayResults([]); // Clear results if the input is empty
+          return;
+        }
+
+        if (applicationName.includes(currentSearch) || applicationDescription.includes(currentSearch) || useCases.includes(currentSearch) || tags.includes(currentSearch)) {
+          matchingResults.push(application);
+        }
+      }
+
+      displayResults(matchingResults);
+
+    }
+
+
+    function handleSpacebar(event) {
+      if (event.key === " ") {
+        search(); // Trigger the search when a space is pressed
+      }
+    }
+  </script>
+
 </body>
 
 </html>
