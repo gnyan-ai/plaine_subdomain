@@ -2946,8 +2946,7 @@ footer.style-1 .foot_info li i {
 
 .navbar.style-1 .navbar-brand img,
 footer.style-1 .foot_info .logo img {
-  width: 100px;
-  height: 80px;
+  height: 50px;
 }
 
 .navbar.style-2 .navbar-nav .nav-item .nav-link::before {
